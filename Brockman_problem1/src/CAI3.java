@@ -128,6 +128,6 @@ public class CAI3 {
 }
 
 /*to do list
- * score not resetting to 0
+ * done
  */ 
 

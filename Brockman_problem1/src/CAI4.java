@@ -18,6 +18,8 @@ public class CAI4 {
 	public void quiz() {
 		boolean repeat = true;
 		while(repeat) {
+			score = 0;
+			num_Correct=0;
 			this.readDifficulty();
 			
 			//The program shall ask the student to solve 10 different multiplication problems
@@ -146,4 +148,8 @@ public class CAI4 {
 	}
 		
 }
+
+/*to do list
+ * done!
+ */ 
 

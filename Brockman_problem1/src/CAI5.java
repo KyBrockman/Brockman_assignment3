@@ -1,4 +1,5 @@
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CAI5 {
@@ -6,9 +7,12 @@ public class CAI5 {
 	static int randInt_1, randInt_2, answer, user_entry, score, diff_lvl, product_range, problem_type;
 	static int num_Correct = 0;
 	static char problem_symbol;
+	static double double_answer,double_user_entry;
+	static boolean divis = false;
 	//static String problem;
 	SecureRandom rand = new SecureRandom();
 	Scanner scan = new Scanner(System.in);
+	DecimalFormat df = new DecimalFormat("#.##");
 
 	public CAI5() {
 	}
@@ -19,6 +23,8 @@ public class CAI5 {
 	public void quiz() {
 		boolean repeat = true;
 		while(repeat) {
+			score = 0;
+			num_Correct = 0;
 		
 		this.readProblemType();	
 		this.readDifficulty();
@@ -59,6 +65,8 @@ public class CAI5 {
 	public void askQuestion() {
 		this.generateQuestionArgument();
 		System.out.println("How much is " + randInt_1 + problem_symbol + randInt_2 + "?");
+		if(divis)
+			System.out.println("please round to 2 decimals");
 	}
 	
 	public void generateQuestionArgument() {
@@ -82,26 +90,28 @@ public class CAI5 {
 	}
 	
 	public void createAdditionProblem() {
+		divis = false;
 		answer = randInt_1 + randInt_2;
 	}
 	public void createMultiplicationProblem() {
+		divis = false;
 		answer = randInt_1*randInt_2;
 	}
 	
 	public void createSubtractionProblem() {
+		divis = false;
 		answer = randInt_1-randInt_2;
 	}
 	
 	public void createDivisionProblem() {
+		divis = true;
 		if(randInt_2 != 0) {
-			answer = randInt_1/randInt_2;
-		}
-		else if(randInt_1 != 0) {
-			answer = randInt_2/randInt_1;
+			double_answer = (double)randInt_1/randInt_2;
 		}
 		else {
 			this.generateQuestionArgument();
 		}
+		double_answer = Double.valueOf(df.format(double_answer));
 	}
 	
 	public void createRandomProblem() {
@@ -120,13 +130,19 @@ public class CAI5 {
 	
 	//Create a method called "readResponse" that reads the answer from the student
 	public void readResponce() {
-		user_entry = scan.nextInt();
+		if(!divis)
+			user_entry = scan.nextInt();
+		else
+			double_user_entry = scan.nextDouble();
 	}	
 
 	//Create a method called "isAsnwerCorrect" that checks to see if the student's 
 	//answer matches the correct answer to the problem
 	public boolean isAsnwerCorrect() {
-		return (user_entry == answer);		
+		if(!divis) 
+			return (user_entry == answer);	
+		else
+			return (double_user_entry == double_answer);
 	}	
 	
 	
@@ -222,4 +238,8 @@ public class CAI5 {
 		
 }
 
+/*to do list
+ * fix division int/int
+ * fix division anwser != int
+ */ 
 
