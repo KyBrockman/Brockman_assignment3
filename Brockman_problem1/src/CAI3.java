@@ -18,7 +18,8 @@ public class CAI3 {
 	public void quiz() {
 		boolean repeat = true;
 		while(repeat) {
-			
+		num_Correct = 0;
+		score=0;
 			//The program shall ask the student to solve 10 different multiplication problems
 			for(int i = 0; i<10; i++) {
 				
@@ -123,7 +124,10 @@ public class CAI3 {
 	public static void main(String args[]) {
 		CAI3 quiz = new CAI3();
 		quiz.quiz();
-	}
-		
+	}	
 }
+
+/*to do list
+ * score not resetting to 0
+ */ 
 

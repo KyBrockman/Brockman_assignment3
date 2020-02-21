@@ -34,7 +34,7 @@ public class CAI4 {
 			//The program shall display the student's score after the student 
 			//has attempted to solve 10 problems
 			//The student's score shall be the percentage of problems correctly solved
-			score = (10*num_Correct)/100;
+			score = (10*num_Correct);
 			System.out.println(score + "%");
 			//The program shall display the message "Please ask your teacher for extra help." 
 			//if the student's score is less than 75%
