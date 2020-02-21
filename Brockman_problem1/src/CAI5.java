@@ -1,15 +1,16 @@
 import java.security.SecureRandom;
 import java.util.Scanner;
 
-public class CAI4 {
+public class CAI5 {
 	
-	static int randInt_1, randInt_2, answer, user_entry, score, diff_lvl, product_range;
+	static int randInt_1, randInt_2, answer, user_entry, score, diff_lvl, product_range, problem_type;
 	static int num_Correct = 0;
+	static char problem_symbol;
 	//static String problem;
 	SecureRandom rand = new SecureRandom();
 	Scanner scan = new Scanner(System.in);
 
-	public CAI4() {
+	public CAI5() {
 	}
 	
 	
@@ -18,8 +19,9 @@ public class CAI4 {
 	public void quiz() {
 		boolean repeat = true;
 		while(repeat) {
-			this.readDifficulty();
-			
+		
+		this.readProblemType();	
+		this.readDifficulty();
 			//The program shall ask the student to solve 10 different multiplication problems
 			for(int i = 0; i<10; i++) {
 				this.askQuestion();
@@ -55,19 +57,67 @@ public class CAI4 {
 		
 	//Create a method called "askQuestion" that prints the problem to the screen
 	public void askQuestion() {
-		this.generateQuestionArguement();
-		System.out.println("How much is " + randInt_1 + " times " + randInt_2 + "?");
+		this.generateQuestionArgument();
+		System.out.println("How much is " + randInt_1 + problem_symbol + randInt_2 + "?");
 	}
-	public void generateQuestionArguement() {
+	
+	public void generateQuestionArgument() {
 		//The program shall generate random numbers with a SecureRandom object
 		//A multiplication problem shall contain two numbers sampled from a
 		//uniform random distribution in the range of 0 to 9 (inclusive)
 		
 		randInt_1 = rand.nextInt(product_range);
 		randInt_2 = rand.nextInt(product_range);
+		switch(problem_symbol) {
+			case '+': this.createAdditionProblem();
+			break;
+			case 'x': this.createMultiplicationProblem();
+			break;
+			case '-': this.createSubtractionProblem();
+			break;
+			case'/': this.createDivisionProblem();
+			break;
+			case'r': this.createRandomProblem();
+		}
+	}
+	
+	public void createAdditionProblem() {
+		answer = randInt_1 + randInt_2;
+	}
+	public void createMultiplicationProblem() {
 		answer = randInt_1*randInt_2;
 	}
-
+	
+	public void createSubtractionProblem() {
+		answer = randInt_1-randInt_2;
+	}
+	
+	public void createDivisionProblem() {
+		if(randInt_2 != 0) {
+			answer = randInt_1/randInt_2;
+		}
+		else if(randInt_1 != 0) {
+			answer = randInt_2/randInt_1;
+		}
+		else {
+			this.generateQuestionArgument();
+		}
+	}
+	
+	public void createRandomProblem() {
+		int z = rand.nextInt(4)+1;
+		switch(z) {
+			case 1: this.createAdditionProblem();
+			break;
+			case 2: this.createDivisionProblem();
+			break;
+			case 3: this.createMultiplicationProblem();
+			break;
+			case 4: this.createSubtractionProblem();
+			break;
+		}
+	}
+	
 	//Create a method called "readResponse" that reads the answer from the student
 	public void readResponce() {
 		user_entry = scan.nextInt();
@@ -117,6 +167,7 @@ public class CAI4 {
 			break;
 		}
 	}
+	
 	public void readDifficulty() {
 		//The program shall ask the student to enter a difficulty level of 1, 2, 3, or 4
 		System.out.println("What difficulty problem would you like (1-4)");
@@ -138,12 +189,37 @@ public class CAI4 {
 		}
 	}
 	
+	public void readProblemType() {
+		//the program shall ask the student to enter a problem type of
+		//1,2,3,4 or 5 with an appropriate human-redable label
+		System.out.println("would you like to do:");
+		System.out.println("(1)addition problems only");
+		System.out.println("(2)multiplication problems only");
+		System.out.println("(3)subtraction problems only");
+		System.out.println("(4)division problems only");
+		System.out.println("(5)a mixture of problem types");
+		
+		problem_type = scan.nextInt(); 
+		switch(problem_type) {
+			case 1: problem_symbol = '+';
+			break;
+			case 2: problem_symbol = 'x';
+			break;
+			case 3:problem_symbol = '-';
+			break;
+			case 4:problem_symbol = '/';
+			break;
+			case 5:problem_symbol = 'r';
+			break;
+		}
+	}
 	//Create a main method that runs your program by calling the "quiz" method
 	
 	public static void main(String args[]) {
-		CAI4 quiz = new CAI4();
+		CAI5 quiz = new CAI5();
 		quiz.quiz();
 	}
 		
 }
+
 

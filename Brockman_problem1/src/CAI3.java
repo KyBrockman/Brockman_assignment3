@@ -26,13 +26,16 @@ public class CAI3 {
 				this.readResponce();
 				if(this.isAsnwerCorrect()) {
 					num_Correct++;
+					this.displayCorrectResponse();
 				}
+				else
+					this.displayInorrectResponse();
 			}
 			//The program shall display the student's score after the student 
 			//has attempted to solve 10 problems
 			//The student's score shall be the percentage of problems correctly solved
-			score = (10*num_Correct)/100;
-			System.out.println(score + "%");
+			score = (10*num_Correct);
+			System.out.println("your score is " +score + "%");
 			//The program shall display the message "Please ask your teacher for extra help." 
 			//if the student's score is less than 75%
 			//The program shall display the message "Congratulations, you are ready to go to 
