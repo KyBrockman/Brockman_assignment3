@@ -76,35 +76,39 @@ public class CAI5 {
 		
 		randInt_1 = rand.nextInt(product_range);
 		randInt_2 = rand.nextInt(product_range);
-		switch(problem_symbol) {
-			case '+': this.createAdditionProblem();
+		switch(problem_type) {
+			case 1: this.createAdditionProblem();
 			break;
-			case 'x': this.createMultiplicationProblem();
+			case 2: this.createMultiplicationProblem();
 			break;
-			case '-': this.createSubtractionProblem();
+			case 3: this.createSubtractionProblem();
 			break;
-			case'/': this.createDivisionProblem();
+			case 4: this.createDivisionProblem();
 			break;
-			case'r': this.createRandomProblem();
+			case 5: this.createRandomProblem();
 		}
 	}
 	
 	public void createAdditionProblem() {
 		divis = false;
+		problem_symbol = '+'; 
 		answer = randInt_1 + randInt_2;
 	}
 	public void createMultiplicationProblem() {
 		divis = false;
+		problem_symbol = 'x';
 		answer = randInt_1*randInt_2;
 	}
 	
 	public void createSubtractionProblem() {
 		divis = false;
+		problem_symbol = '-';
 		answer = randInt_1-randInt_2;
 	}
 	
 	public void createDivisionProblem() {
 		divis = true;
+		problem_symbol = '/';
 		if(randInt_2 != 0) {
 			double_answer = (double)randInt_1/randInt_2;
 		}
@@ -216,19 +220,9 @@ public class CAI5 {
 		System.out.println("(5)a mixture of problem types");
 		
 		problem_type = scan.nextInt(); 
-		switch(problem_type) {
-			case 1: problem_symbol = '+';
-			break;
-			case 2: problem_symbol = 'x';
-			break;
-			case 3:problem_symbol = '-';
-			break;
-			case 4:problem_symbol = '/';
-			break;
-			case 5:problem_symbol = 'r';
-			break;
+
 		}
-	}
+	
 	//Create a main method that runs your program by calling the "quiz" method
 	
 	public static void main(String args[]) {
@@ -239,7 +233,6 @@ public class CAI5 {
 }
 
 /*to do list
- * fix division int/int
- * fix division anwser != int
+ *done
  */ 
 
